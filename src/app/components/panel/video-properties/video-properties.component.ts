@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoDetailsModel } from 'src/app/models/video-details-model';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class VideoPropertiesComponent implements OnInit {
   constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
+
   }
 
   onSelectVideo(event: Event) {
@@ -24,5 +26,4 @@ export class VideoPropertiesComponent implements OnInit {
       }
     }
   }
-
 }
