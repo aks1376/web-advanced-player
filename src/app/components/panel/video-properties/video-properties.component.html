@@ -1,0 +1,15 @@
+<section class="properties">
+  <div class="load-file">
+    <button (click)="selectVideoFileRef.click()">Load</button>
+  </div>
+  <div class="file-detailes">
+    <app-video-details></app-video-details>
+
+  </div>
+</section>
+
+<input #selectVideoFileRef
+       type="file"
+       style="display: none;"
+       accept="audio/*,video/*"
+       (change)="onSelectVideo($event)">
