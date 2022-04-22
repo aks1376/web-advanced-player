@@ -6,6 +6,7 @@ import { PanelComponent } from './components/panel/panel.component';
 import { VideoPlayerComponent } from './components/panel/video-player/video-player.component';
 import { VideoPropertiesComponent } from './components/panel/video-properties/video-properties.component';
 import { VideoDetailsComponent } from './components/panel/video-properties/video-details/video-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { VideoDetailsComponent } from './components/panel/video-properties/video
     VideoDetailsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
