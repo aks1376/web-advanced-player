@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { VideoDetailsModel } from 'src/app/models/video-details-model';
 import { VideoService } from 'src/app/services/video.service';
 
@@ -8,12 +8,16 @@ import { VideoService } from 'src/app/services/video.service';
   styleUrls: ['./video-player.component.scss']
 })
 export class VideoPlayerComponent implements OnInit {
-  @ViewChild('videoPlayerRef', { static: true }) videoRef: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoPlayerRef', { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
 
-  constructor(private videoService: VideoService) { }
+  constructor(
+    private videoService: VideoService,
+    private renderer: Renderer2
+  ) { }
 
   ngOnInit(): void {
     this.onAddVideo();
+    this.onAddSubtitle();
   }
 
   onAddVideo() {
@@ -32,6 +36,20 @@ export class VideoPlayerComponent implements OnInit {
     setTimeout(() => {
       this.loadVideoDetails(video);
     }, 200);
+  }
+
+  onAddSubtitle() {
+    this.videoService.subtitleFile.subscribe({
+      next: (subtitle) => {
+        const track = this.renderer.createElement('track');
+        this.renderer.setAttribute(track, 'label', subtitle.label);
+        this.renderer.setAttribute(track, 'kind', 'subtitles');
+        this.renderer.setAttribute(track, 'srclang', subtitle.srclang);
+        this.renderer.setAttribute(track, 'src', URL.createObjectURL(subtitle.file));
+
+        this.videoRef.nativeElement.appendChild(track);
+      }
+    });
   }
 
   loadVideoDetails(videoFile: File) {
