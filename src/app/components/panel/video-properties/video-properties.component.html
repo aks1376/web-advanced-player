@@ -1,11 +1,14 @@
 <section class="properties">
   <div class="load-file">
-    <button (click)="selectVideoFileRef.click()">Load</button>
+    <button mat-raised-button color="primary" (click)="selectVideoFileRef.click()">Load Video</button>
   </div>
   <div class="file-detailes">
     <app-video-details></app-video-details>
-
   </div>
+  <div class="subtitle">
+    <app-subtitles></app-subtitles>
+  </div>
+
 </section>
 
 <input #selectVideoFileRef
