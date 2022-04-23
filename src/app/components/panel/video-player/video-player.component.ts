@@ -18,6 +18,7 @@ export class VideoPlayerComponent implements OnInit {
   ngOnInit(): void {
     this.onAddVideo();
     this.onAddSubtitle();
+    this.onSubtitleStatusChange();
   }
 
   onAddVideo() {
@@ -61,6 +62,16 @@ export class VideoPlayerComponent implements OnInit {
       duration: this.videoRef.nativeElement.duration
     };
     this.videoService.videoDetails.next(details);
+  }
+
+  onSubtitleStatusChange() {
+    this.videoService.subtitleStatus.subscribe({
+      next: (status) => {
+        const tracks = Array.from(this.videoRef.nativeElement.textTracks);
+        const selectedTrackIndex = tracks.findIndex(x => x.label === status.label);
+        this.videoRef.nativeElement.textTracks[selectedTrackIndex].mode = status.isShowing ? 'showing' : 'hidden';
+      }
+    });
   }
 
 }

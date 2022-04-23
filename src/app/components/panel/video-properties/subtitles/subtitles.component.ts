@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SubtitleFileModel } from 'src/app/models/subtitle-file-model';
+import { SubtitleStatusModel } from 'src/app/models/subtitle-status-model';
 import { VideoService } from 'src/app/services/video.service';
 import { AddSubtitleDialogComponent } from './add-subtitle-dialog/add-subtitle-dialog.component';
 
@@ -35,9 +36,8 @@ export class SubtitlesComponent implements OnInit {
   }
 
   onSelectSubtitle(selected: boolean, label: string) {
-    const subtitle = this.subtitles.find(x => x.label === label);
-    if (subtitle) {
-    }
+    const status: SubtitleStatusModel = { label, isShowing: selected };
+    this.videoService.subtitleStatus.next(status);
   }
 
 }
