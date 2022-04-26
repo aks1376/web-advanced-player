@@ -10,6 +10,8 @@ import { VideoService } from 'src/app/services/video.service';
 export class VideoPlayerComponent implements OnInit {
   @ViewChild('videoPlayerRef', { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
 
+  entireScreen: boolean = false;
+
   constructor(
     private videoService: VideoService,
     private renderer: Renderer2
@@ -74,4 +76,29 @@ export class VideoPlayerComponent implements OnInit {
     });
   }
 
+  onPlay() {
+    this.videoRef.nativeElement.play()
+  }
+
+  onPause() {
+    console.log('pause');
+    
+    this.videoRef.nativeElement.pause()
+  }
+
+  onMute() {
+    this.videoRef.nativeElement.muted = true;
+  }
+
+  onEntireScreen() {
+    this.entireScreen = true;
+  }
+
+  onFullScreen() {
+    this.videoRef.nativeElement.requestFullscreen();
+  }
+
+  onPictureInPicture() { 
+    this.videoRef.nativeElement.requestPictureInPicture();
+  }
 }
