@@ -10,8 +10,6 @@ import { VideoService } from 'src/app/services/video.service';
 export class VideoPlayerComponent implements OnInit {
   @ViewChild('videoPlayerRef', { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
 
-  entireScreen: boolean = false;
-
   constructor(
     private videoService: VideoService,
     private renderer: Renderer2
@@ -89,10 +87,11 @@ export class VideoPlayerComponent implements OnInit {
   onMute() {
     this.videoRef.nativeElement.muted = true;
   }
-
-  onEntireScreen() {
-    this.entireScreen = true;
+  
+  onUnmute() {
+    this.videoRef.nativeElement.muted = false;
   }
+
 
   onFullScreen() {
     this.videoRef.nativeElement.requestFullscreen();

@@ -11,4 +11,21 @@
     justify-content: center;
     color: white;
   }
+
+  .btn-controller {
+    background: transparent;
+    border: 0;
+    outline: none;
+    transition: 200ms;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    svg {
+      fill: white;
+      width: 5rem;
+      height: 5rem;
+    }
+  }
 }

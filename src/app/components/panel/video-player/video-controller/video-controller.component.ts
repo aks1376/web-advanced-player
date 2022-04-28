@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
+import { VideoService } from 'src/app/services/video.service';
 
 @Component({
   selector: 'app-video-controller',
@@ -11,6 +12,7 @@ export class VideoControllerComponent implements OnInit {
   @ViewChild('currentTimeRef') currentTimeRef!: ElementRef<HTMLParagraphElement>;
 
   currentTime: number = 0;
+  entirePage = false;
   @Input() duration: number = 0;
   @Input('currentTime') set setCurrentTime(time: number) {
     console.log(time);
@@ -21,42 +23,45 @@ export class VideoControllerComponent implements OnInit {
     this.videoRef = element;
     element.addEventListener('timeupdate', () => {
       this.currentTimeRef.nativeElement.innerText = String(this.floorNumber(element.currentTime));
+      // this.videoRef.paused
     });
   }
 
   @Output() play = new EventEmitter();
   @Output() pause = new EventEmitter();
   @Output() mute = new EventEmitter();
-  @Output() entireScreen = new EventEmitter();
+  @Output() unmute = new EventEmitter();
   @Output() fullScreen = new EventEmitter();
   @Output() pictureInPicture = new EventEmitter();
 
-  constructor() { }
+  constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
   }
 
-  onPlay() {
-    this.play.emit();
+  onPlayPause() {
+    this.videoRef.paused ? this.play.emit() : this.pause.emit();
   }
-  onPause() {
-    this.pause.emit();
-  }
+
   onMute() {
-    this.mute.emit();
+    this.videoRef.muted ? this.unmute.emit() : this.mute.emit();
   }
-  onEntireScreen() {
-    this.entireScreen.emit();
+
+  onEntirePage() {
+    this.entirePage = !this.videoService.entirePage.value;
+    this.videoService.entirePage.value ? this.videoService.entirePage.next(false) : this.videoService.entirePage.next(true);
   }
+
   onFullScreen() {
     this.fullScreen.emit();
   }
+
   onPictureInPicture() {
     this.pictureInPicture.emit();
   }
 
   onChangeTrack(event: MatSliderChange) {
-    if(event.value){
+    if (event.value) {
       this.videoRef.currentTime = event.value;
     }
   }
