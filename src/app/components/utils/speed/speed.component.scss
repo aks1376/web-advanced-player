@@ -6,7 +6,7 @@
 
   .set-speed {
     .btn-change-value {
-      padding: 5px 10px;
+      padding: 2px 5px;
       margin: 0 5px;
       border: 0;
       fill: white;
@@ -14,13 +14,13 @@
       border-radius: 5px;
 
       svg {
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
 
     .speed-input {
-      width: 6rem;
+      width: 4rem;
       outline: none;
       padding: 5px 10px;
       background: transparent;

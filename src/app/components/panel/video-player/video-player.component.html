@@ -1,6 +1,6 @@
 <div class="video-player h-100">
   <video #videoPlayerRef></video>
-  <app-video-controller
+  <app-video-controller class="video-controller"
     [duration]="videoPlayerRef.duration"
     [videoRef]="videoPlayerRef"
     (play)="onPlay()"
