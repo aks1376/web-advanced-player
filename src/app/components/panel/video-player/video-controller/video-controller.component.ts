@@ -69,4 +69,9 @@ export class VideoControllerComponent implements OnInit {
   floorNumber(number: number) {
     return Math.floor(number)
   }
+
+  onSpeedChange(event: number) {
+    this.videoRef.playbackRate = event;
+  }
+
 }

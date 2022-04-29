@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VideoControllerComponent } from './components/panel/video-player/video-controller/video-controller.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { SpeedComponent } from './components/utils/speed/speed.component';
 
 const material = [
   MatButtonModule,
@@ -36,7 +37,8 @@ const material = [
     VideoDetailsComponent,
     SubtitlesComponent,
     AddSubtitleDialogComponent,
-    VideoControllerComponent
+    VideoControllerComponent,
+    SpeedComponent
   ],
   imports: [
     BrowserModule,
