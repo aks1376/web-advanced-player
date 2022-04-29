@@ -74,4 +74,12 @@ export class VideoControllerComponent implements OnInit {
     this.videoRef.playbackRate = event;
   }
 
+  fastBackward() {
+    this.videoRef.currentTime -= 10;
+  }
+
+  fastForward() {
+    this.videoRef.currentTime += 10;
+  }
+
 }
