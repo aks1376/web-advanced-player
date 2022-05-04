@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-speed',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SpeedComponent implements OnInit {
 
+  @Input() disabled: boolean = false;
   @Output() speed = new EventEmitter<number>();
 
   speedValue = 1.00;

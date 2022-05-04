@@ -30,6 +30,11 @@
           opacity: 0.8;
         }
 
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+
         svg {
           fill: white;
           width: 3rem;

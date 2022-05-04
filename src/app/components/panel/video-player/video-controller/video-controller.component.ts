@@ -20,6 +20,8 @@ export class VideoControllerComponent implements OnInit {
 
   videoRef!: HTMLVideoElement;
   @Input('videoRef') set setVideoRef(element: HTMLVideoElement) {
+    console.log({ element });
+
     this.videoRef = element;
     element.addEventListener('timeupdate', () => {
       this.currentTimeRef.nativeElement.innerText = String(this.floorNumber(element.currentTime));
@@ -34,9 +36,19 @@ export class VideoControllerComponent implements OnInit {
   @Output() fullScreen = new EventEmitter();
   @Output() pictureInPicture = new EventEmitter();
 
+  disableVideoController = true;
+
   constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
+    this.checkVideoIsReady();
+  }
+
+  checkVideoIsReady() {
+    this.videoRef.addEventListener('canplay', (event) => {
+      console.log({ event });
+      this.disableVideoController = false;
+    });
   }
 
   onPlayPause() {
