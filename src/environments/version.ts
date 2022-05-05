@@ -3,12 +3,12 @@
 /* eslint-disable */
 export const VERSION = {
     "dirty": true,
-    "raw": "db8c502-dirty",
-    "hash": "db8c502",
+    "raw": "aa74d0f-dirty",
+    "hash": "aa74d0f",
     "distance": null,
     "tag": null,
     "semver": null,
-    "suffix": "db8c502-dirty",
+    "suffix": "aa74d0f-dirty",
     "semverString": null,
     "version": "1.1.0"
 };
