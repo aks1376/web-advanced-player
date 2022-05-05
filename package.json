@@ -1,12 +1,14 @@
 {
   "name": "web-advanced-player",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "node git-version.js",
+    "build-prod": "npm run postinstall && ng build --configuration=production --output-path docs --base-href /angular-app/"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +38,8 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.6.2"
+    "typescript": "~4.6.2",
+    "fs-extra": "6.0.1",
+    "git-describe": "4.1.0"
   }
 }
