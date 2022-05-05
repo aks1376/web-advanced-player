@@ -74,4 +74,28 @@ export class VideoPlayerComponent implements OnInit {
     });
   }
 
+  onPlay() {
+    this.videoRef.nativeElement.play()
+  }
+
+  onPause() {
+    this.videoRef.nativeElement.pause()
+  }
+
+  onMute() {
+    this.videoRef.nativeElement.muted = true;
+  }
+  
+  onUnmute() {
+    this.videoRef.nativeElement.muted = false;
+  }
+
+
+  onFullScreen() {
+    this.videoRef.nativeElement.requestFullscreen();
+  }
+
+  onPictureInPicture() { 
+    this.videoRef.nativeElement.requestPictureInPicture();
+  }
 }

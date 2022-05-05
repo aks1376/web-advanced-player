@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoService } from 'src/app/services/video.service';
 
 @Component({
   selector: 'app-panel',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelComponent implements OnInit {
 
-  constructor() { }
+  entirePage = false;
+
+  constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
+    this.listenOnEntirePage();
+  }
+
+  listenOnEntirePage() {
+    this.videoService.entirePage.subscribe({
+      next: (entirePage) => {
+        this.entirePage = entirePage;
+      }
+    })
   }
 
 }

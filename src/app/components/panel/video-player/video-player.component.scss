@@ -2,10 +2,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  &:hover {
+    .video-controller {
+      opacity: 1;
+      transition:opacity .1s ease-out 0s;
+    }
+  }
 
   video {
     background: black;
     height: 100%;
     width: 100%;
+  }
+
+  .video-controller {
+    opacity: 0;
+    transition:opacity .1s ease-out .3s;
+    transition-timing-function: ease-out;
   }
 }

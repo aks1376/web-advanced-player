@@ -1,3 +1,12 @@
 <div class="video-player h-100">
-  <video #videoPlayerRef controls></video>
+  <video #videoPlayerRef></video>
+  <app-video-controller class="video-controller"
+    [duration]="videoPlayerRef.duration"
+    [videoRef]="videoPlayerRef"
+    (play)="onPlay()"
+    (pause)="onPause()"
+    (mute)="onMute()"
+    (unmute)="onUnmute()"
+    (fullScreen)="onFullScreen()"
+    (pictureInPicture)="onPictureInPicture()"></app-video-controller>
 </div>

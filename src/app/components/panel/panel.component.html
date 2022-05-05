@@ -2,7 +2,7 @@
   <div class="video-config">
     <app-video-properties></app-video-properties>
   </div>
-  <div class="video-player h-100">
+  <div class="video-player h-100" [ngClass]="{'entire-page': entirePage}">
     <app-video-player></app-video-player>
   </div>
 </section>

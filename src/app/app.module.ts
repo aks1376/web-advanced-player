@@ -15,13 +15,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { VideoControllerComponent } from './components/panel/video-player/video-controller/video-controller.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { SpeedComponent } from './components/utils/speed/speed.component';
+import { SecondsToHumanPipe } from './pipes/seconds-to-human.pipe';
+import { BytesToHumanPipe } from './pipes/bytes-to-human.pipe';
 
 const material = [
   MatButtonModule,
   MatCheckboxModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSliderModule
 ];
 
 @NgModule({
@@ -32,15 +38,19 @@ const material = [
     VideoPropertiesComponent,
     VideoDetailsComponent,
     SubtitlesComponent,
-    AddSubtitleDialogComponent
+    AddSubtitleDialogComponent,
+    VideoControllerComponent,
+    SpeedComponent,
+    SecondsToHumanPipe,
+    BytesToHumanPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ...material
+    ...material,
   ],
-  providers: [],
+  providers: [SecondsToHumanPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
