@@ -1,0 +1,53 @@
+.video-controller {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px 10px;
+  background: linear-gradient(0deg, black, transparent);
+
+  .track-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    .btn-group {
+      display: flex;
+      align-items: center;
+      .btn-controller {
+        background: transparent;
+        border: 0;
+        outline: none;
+        transition: 200ms;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+
+        svg {
+          fill: white;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+    }
+
+    .btn-entire-page {
+      svg {
+        width: 2rem !important;
+        height: 2rem !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.video-details {
+  .title {
+    background: #1d1d20;
+    color: white;
+    font-size: 1.2rem;
+    padding: 5px 5px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      td {
+        overflow-wrap: anywhere;
+        color: white;
+        border: 1px solid #444444;
+        padding: 5px;
+        background: #1e1e1e;
+
+        &:first-child {
+          width: 6rem;
+        }
+      }
+    }
+  }
+}
