@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VideoControllerComponent } from './components/panel/video-player/video-controller/video-controller.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { SpeedComponent } from './components/utils/speed/speed.component';
+import { SecondsToHumanPipe } from './pipes/seconds-to-human.pipe';
+import { BytesToHumanPipe } from './pipes/bytes-to-human.pipe';
 
 const material = [
   MatButtonModule,
@@ -38,7 +40,9 @@ const material = [
     SubtitlesComponent,
     AddSubtitleDialogComponent,
     VideoControllerComponent,
-    SpeedComponent
+    SpeedComponent,
+    SecondsToHumanPipe,
+    BytesToHumanPipe
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ const material = [
     ReactiveFormsModule,
     ...material,
   ],
-  providers: [],
+  providers: [SecondsToHumanPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

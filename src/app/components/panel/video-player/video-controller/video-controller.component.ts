@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
+import { SecondsToHumanPipe } from 'src/app/pipes/seconds-to-human.pipe';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { VideoService } from 'src/app/services/video.service';
   styleUrls: ['./video-controller.component.scss']
 })
 export class VideoControllerComponent implements OnInit {
-
   @ViewChild('currentTimeRef') currentTimeRef!: ElementRef<HTMLParagraphElement>;
 
   currentTime: number = 0;
@@ -20,12 +20,9 @@ export class VideoControllerComponent implements OnInit {
 
   videoRef!: HTMLVideoElement;
   @Input('videoRef') set setVideoRef(element: HTMLVideoElement) {
-    console.log({ element });
-
     this.videoRef = element;
     element.addEventListener('timeupdate', () => {
-      this.currentTimeRef.nativeElement.innerText = String(this.floorNumber(element.currentTime));
-      // this.videoRef.paused
+      this.currentTimeRef.nativeElement.innerText = this.secondsToHumanPipe.transform(this.floorNumber(element.currentTime));
     });
   }
 
@@ -38,7 +35,10 @@ export class VideoControllerComponent implements OnInit {
 
   disableVideoController = true;
 
-  constructor(private videoService: VideoService) { }
+  constructor(
+    private videoService: VideoService,
+    private secondsToHumanPipe: SecondsToHumanPipe
+    ) { }
 
   ngOnInit(): void {
     this.checkVideoIsReady();
@@ -46,7 +46,6 @@ export class VideoControllerComponent implements OnInit {
 
   checkVideoIsReady() {
     this.videoRef.addEventListener('canplay', (event) => {
-      console.log({ event });
       this.disableVideoController = false;
     });
   }

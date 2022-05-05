@@ -10,7 +10,7 @@
         <td>Size</td>
         <td>
           <ng-container *ngIf="videoDetails.size !== 0">
-            {{videoDetails?.size}}
+            {{videoDetails?.size | bytesToHuman}}
           </ng-container>
         </td>
       </tr>
@@ -26,7 +26,7 @@
         <td>Duration</td>
         <td>
           <ng-container *ngIf="videoDetails.duration !== 0">
-            {{videoDetails.duration}}
+            {{videoDetails.duration | secondsToHuman}}
           </ng-container>
         </td>
       </tr>

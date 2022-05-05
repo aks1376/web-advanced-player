@@ -79,8 +79,6 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   onPause() {
-    console.log('pause');
-    
     this.videoRef.nativeElement.pause()
   }
 

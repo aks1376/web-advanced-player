@@ -1,7 +1,7 @@
 <section class="video-controller">
 
   <div class="track-bar">
-    <p class="pe-2" #currentTimeRef></p>
+    <p class="pe-2" #currentTimeRef>00:00:00</p>
     <mat-slider class="w-100"
                 min="0"
                 [max]="floorNumber(videoRef.duration)"
@@ -9,7 +9,7 @@
                 [value]="floorNumber(videoRef.currentTime)"
                 (input)="onChangeTrack($event)"
                 [disabled]="disableVideoController"></mat-slider>
-    <p class="ps-2">{{floorNumber(videoRef.duration)}}</p>
+    <p class="ps-2">{{floorNumber(videoRef.duration) | secondsToHuman}}</p>
   </div>
 
   <div class="buttons">
