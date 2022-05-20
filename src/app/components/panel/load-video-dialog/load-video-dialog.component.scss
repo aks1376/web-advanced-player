@@ -1,0 +1,30 @@
+.load-video {
+  border: 2px solid transparent;
+  background: #343434;
+  border-radius: 5px;
+  .select-file {
+    cursor: pointer;
+    .hint {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .btn-load-file {
+      background: transparent;
+      border: 0;
+      padding: 20px 0;
+      outline: none;
+      svg {
+        width: 20rem;
+        height: 20rem;
+      }
+    }
+  }
+}
+
+.file-over {
+  border-color: rgb(17, 250, 106);
+}
+
+.Invalid {
+  border-color: rgb(250, 17, 17) !important;
+}

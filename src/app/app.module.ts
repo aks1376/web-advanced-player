@@ -20,6 +20,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { SpeedComponent } from './components/utils/speed/speed.component';
 import { SecondsToHumanPipe } from './pipes/seconds-to-human.pipe';
 import { BytesToHumanPipe } from './pipes/bytes-to-human.pipe';
+import { LoadVideoDialogComponent } from './components/panel/load-video-dialog/load-video-dialog.component';
+import { DropFileDirective } from './directives/drop-file.directive';
 
 const material = [
   MatButtonModule,
@@ -42,7 +44,9 @@ const material = [
     VideoControllerComponent,
     SpeedComponent,
     SecondsToHumanPipe,
-    BytesToHumanPipe
+    BytesToHumanPipe,
+    LoadVideoDialogComponent,
+    DropFileDirective
   ],
   imports: [
     BrowserModule,
