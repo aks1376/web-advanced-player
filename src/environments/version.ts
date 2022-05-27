@@ -3,13 +3,13 @@
 /* eslint-disable */
 export const VERSION = {
     "dirty": true,
-    "raw": "aa74d0f-dirty",
-    "hash": "aa74d0f",
+    "raw": "9ff67f5-dirty",
+    "hash": "9ff67f5",
     "distance": null,
     "tag": null,
     "semver": null,
-    "suffix": "aa74d0f-dirty",
+    "suffix": "9ff67f5-dirty",
     "semverString": null,
-    "version": "1.1.0"
+    "version": "2.0.0"
 };
 /* tslint:enable */
