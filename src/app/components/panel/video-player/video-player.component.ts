@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { SubtitleModel } from 'src/app/models/subtitle-model';
 import { VideoDetailsModel } from 'src/app/models/video-details-model';
+import { SubtitleService } from 'src/app/services/subtitle.service';
 import { VideoService } from 'src/app/services/video.service';
 
 @Component({
@@ -10,14 +12,17 @@ import { VideoService } from 'src/app/services/video.service';
 export class VideoPlayerComponent implements OnInit {
   @ViewChild('videoPlayerRef', { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
 
+  subtitles: SubtitleModel[] = [];
+
   constructor(
     private videoService: VideoService,
+    private subtitleService: SubtitleService,
     private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
     this.onAddVideo();
-    this.onAddSubtitle();
+    this.onAddOrChangeSubtitle();
     this.onSubtitleStatusChange();
   }
 
@@ -39,9 +44,10 @@ export class VideoPlayerComponent implements OnInit {
     }, 200);
   }
 
-  onAddSubtitle() {
-    this.videoService.subtitleFile.subscribe({
+  onAddOrChangeSubtitle() {
+    this.subtitleService.addNewSubtitle.subscribe({
       next: (subtitle) => {
+
         const track = this.renderer.createElement('track');
         this.renderer.setAttribute(track, 'label', subtitle.label);
         this.renderer.setAttribute(track, 'kind', 'subtitles');
@@ -65,11 +71,11 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   onSubtitleStatusChange() {
-    this.videoService.subtitleStatus.subscribe({
-      next: (status) => {
+    this.subtitleService.subtitleStatus.subscribe({
+      next: (subtitle) => {
         const tracks = Array.from(this.videoRef.nativeElement.textTracks);
-        const selectedTrackIndex = tracks.findIndex(x => x.label === status.label);
-        this.videoRef.nativeElement.textTracks[selectedTrackIndex].mode = status.isShowing ? 'showing' : 'hidden';
+        const selectedTrackIndex = tracks.findIndex(x => x.label === subtitle.label);
+        this.videoRef.nativeElement.textTracks[selectedTrackIndex].mode = subtitle.isActive ? 'showing' : 'hidden';
       }
     });
   }
@@ -85,7 +91,7 @@ export class VideoPlayerComponent implements OnInit {
   onMute() {
     this.videoRef.nativeElement.muted = true;
   }
-  
+
   onUnmute() {
     this.videoRef.nativeElement.muted = false;
   }
@@ -95,7 +101,7 @@ export class VideoPlayerComponent implements OnInit {
     this.videoRef.nativeElement.requestFullscreen();
   }
 
-  onPictureInPicture() { 
+  onPictureInPicture() {
     this.videoRef.nativeElement.requestPictureInPicture();
   }
 }

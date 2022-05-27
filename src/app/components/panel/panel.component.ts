@@ -10,7 +10,6 @@ import { LoadVideoDialogComponent } from './load-video-dialog/load-video-dialog.
 })
 export class PanelComponent implements OnInit {
 
-  entirePage = false;
 
   constructor(
     private videoService: VideoService,
@@ -18,7 +17,6 @@ export class PanelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listenOnEntirePage();
     this.loadVideoFile();
   }
 
@@ -27,13 +25,4 @@ export class PanelComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe();
   }
-
-  listenOnEntirePage() {
-    this.videoService.entirePage.subscribe({
-      next: (entirePage) => {
-        this.entirePage = entirePage;
-      }
-    })
-  }
-
 }

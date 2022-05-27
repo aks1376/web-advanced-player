@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SubtitleFileModel } from 'src/app/models/subtitle-file-model';
+import { SubtitleService } from 'src/app/services/subtitle.service';
 
 @Component({
   selector: 'app-add-subtitle-dialog',
@@ -13,12 +13,13 @@ export class AddSubtitleDialogComponent implements OnInit {
   subtitleFile!: File;
   form: FormGroup = this.fb.group({
     label: ['', [Validators.required, Validators.minLength(2)]],
-    srclang: ['', [Validators.required, Validators.minLength(2)]]
+    srclang: ['EN', [Validators.required, Validators.minLength(2)]]
   });
 
   constructor(
     private dialogRef: MatDialogRef<AddSubtitleDialogComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private subtitleService: SubtitleService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class AddSubtitleDialogComponent implements OnInit {
         const file: File = filesArray[0];
 
         this.subtitleFile = file;
+        this.form.get('label')?.patchValue(file.name);
       }
     }
   }
@@ -42,16 +44,14 @@ export class AddSubtitleDialogComponent implements OnInit {
 
   onAddSubtitleToVideo() {
     if (this.form.valid && this.subtitleFile) {
-      const value = this.form.value;
+      const {
+        label,
+        srclang
+      } = this.form.value;
 
-      const subtitle: SubtitleFileModel = {
-        file: this.subtitleFile,
-        label: value.label,
-        srclang: value.srclang
-      }
+      this.subtitleService.addSubtitle(label, srclang, this.subtitleFile);
 
-      this.dialogRef.close(subtitle);
-
+      this.dialogRef.close();
     }
   }
 

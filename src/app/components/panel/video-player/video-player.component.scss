@@ -4,10 +4,10 @@
   align-items: center;
   position: relative;
 
-  &:hover {
+  &:hover{
     .video-controller {
       opacity: 1;
-      transition:opacity .1s ease-out 0s;
+      transition: opacity 0.1s ease-out 0s;
     }
   }
 
@@ -19,7 +19,7 @@
 
   .video-controller {
     opacity: 0;
-    transition:opacity .1s ease-out .3s;
+    transition: opacity 0.1s ease-out 0.3s;
     transition-timing-function: ease-out;
   }
 }

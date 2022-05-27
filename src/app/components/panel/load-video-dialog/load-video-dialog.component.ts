@@ -25,14 +25,19 @@ export class LoadVideoDialogComponent implements OnInit {
       if (files) {
         const filesArray = Array.from(files);
         const file: File = filesArray[0];
+        this.onPlayVideo(file);
 
-        this.videoService.videoFile.next(file);
       }
     }
   }
 
-  onFileDrop(event: any) {
-    console.log(event);
+  onFileDrop(event: File) {
+    this.onPlayVideo(event);
+  }
+
+  onPlayVideo(file: File) {
+    this.videoService.videoFile.next(file);
+    this.dialogRef.close();
   }
 
 }

@@ -41,12 +41,12 @@
           height: 3rem;
         }
       }
-    }
 
-    .btn-entire-page {
-      svg {
-        width: 2rem !important;
-        height: 2rem !important;
+      .picture-in-picture {
+        display: none;
+        @media only screen and (min-width: 992px) {
+          display: inline-block;
+        }
       }
     }
   }
