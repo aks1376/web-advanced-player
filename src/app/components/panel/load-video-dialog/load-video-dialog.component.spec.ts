@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VideoPropertiesComponent } from './video-properties.component';
+import { LoadVideoDialogComponent } from './load-video-dialog.component';
 
-describe('VideoPropertiesComponent', () => {
-  let component: VideoPropertiesComponent;
-  let fixture: ComponentFixture<VideoPropertiesComponent>;
+describe('LoadVideoDialogComponent', () => {
+  let component: LoadVideoDialogComponent;
+  let fixture: ComponentFixture<LoadVideoDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoPropertiesComponent ]
+      declarations: [ LoadVideoDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VideoPropertiesComponent);
+    fixture = TestBed.createComponent(LoadVideoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,9 @@
 <section class="video-controller">
 
+  <div class="video-speed-small-screen">
+    <app-speed class="video-speed ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+  </div>
+
   <div class="track-bar">
     <p class="pe-2" #currentTimeRef>00:00:00</p>
     <mat-slider class="w-100"
@@ -15,7 +19,7 @@
   <div class="buttons">
 
     <div class="btn-group">
-      <button class="btn btn-controller me-3" (click)="onPlayPause()" [disabled]="disableVideoController">
+      <button class="btn btn-controller me-2" (click)="onPlayPause()" [disabled]="disableVideoController">
         <ng-container *ngIf="videoRef.paused else pauseVideo">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                xml:space="preserve" viewBox="20 20 60 60">
@@ -69,10 +73,12 @@
         </svg>
       </button>
 
-      <app-speed class="ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+      <div class="video-speed-large-screen">
+        <app-speed class="video-speed ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+      </div>
     </div>
 
-    <div class="btn btn-group">
+    <div class="btn-group">
       <button class="btn btn-controller me-2" (click)="onMute()" [disabled]="disableVideoController">
         <ng-container *ngIf="videoRef.muted else unmute">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -90,35 +96,11 @@
         </ng-template>
       </button>
 
-      <button class="btn btn-controller btn-entire-page me-2" (click)="onEntirePage()"
-              [disabled]="disableVideoController">
-        <ng-container *ngIf="entirePage else exitEntirePage">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-               enable-background="new 0 0 32 32" height="32px" version="1.1" viewBox="0 0 32 32" width="32px">
-            <g id="Fullscreen_Exit">
-              <path
-                    d="M22.008,13.007h9C31.576,13.007,32,12.559,32,11.992c0-0.568-0.424-0.985-0.992-0.984h-8V2.992   c0-0.568-0.432-1-1-1c-0.568,0-1,0.432-1,1v9c0,0.003,0.001,0.005,0.001,0.007c0,0.003-0.001,0.005-0.001,0.008   C21.008,12.565,21.45,13.008,22.008,13.007z" />
-              <path
-                    d="M9.984,2C9.417,2,9,2.425,9,2.992v8H0.985c-0.568,0-1,0.432-1,1c0,0.568,0.432,1,1,1h9   c0.003,0,0.005-0.001,0.007-0.001c0.003,0,0.005,0.001,0.008,0.001c0.558,0,1-0.442,1-1v-9C11,2.425,10.552,2.001,9.984,2z" />
-              <path
-                    d="M9.992,18.992h-9C0.424,18.993,0,19.44,0,20.008c0,0.568,0.424,0.985,0.992,0.984h8v8.015   c0,0.568,0.432,1,1,1c0.568,0,1-0.432,1-1v-9c0-0.003-0.001-0.005-0.001-0.007c0-0.003,0.001-0.005,0.001-0.008   C10.992,19.434,10.55,18.992,9.992,18.992z" />
-              <path
-                    d="M31.015,18.992h-9c-0.003,0-0.005,0.001-0.007,0.001c-0.003,0-0.005-0.001-0.008-0.001   c-0.558,0-1,0.442-1,1v9c0,0.568,0.448,0.991,1.016,0.992C22.583,29.985,23,29.56,23,28.993v-8h8.015c0.568,0,1-0.432,1-1   C32.015,19.425,31.583,18.993,31.015,18.992z" />
-            </g>
-          </svg>
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="17"
-               height="17" viewBox="0 0 17 17">
-            <path
-                  d="M15.996 11.352l0.004 4.648-4.649-0.004 0.001-1 2.94 0.003-5.792-5.791-5.792 5.792 2.94-0.003 0.001 1-4.649 0.003 0.004-4.649 1 0.001-0.003 2.939 5.792-5.791-5.792-5.792 0.003 2.939-1 0.001-0.004-4.648 4.649 0.004-0.001 1-2.94-0.003 5.792 5.792 5.792-5.792-2.94 0.003-0.001-1 4.649-0.004-0.004 4.649-1-0.001 0.003-2.939-5.792 5.791 5.792 5.792-0.003-2.939 1-0.001z" />
-          </svg> -->
-        </ng-container>
-        <ng-template #exitEntirePage>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
-            <path
-                  d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
-          </svg>
-
-        </ng-template>
+      <button class="btn btn-controller btn-subtitle" (click)="onOpenSubtitlePanel()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path
+                d="M512 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h448c35.35 0 64-28.65 64-64V96C576 60.65 547.3 32 512 32zM168.6 289.9c18.69 18.72 49.19 18.72 67.87 0c9.375-9.375 24.56-9.375 33.94 0s9.375 24.56 0 33.94c-18.72 18.72-43.28 28.08-67.87 28.08s-49.16-9.359-67.87-28.08C116.5 305.8 106.5 281.6 106.5 256s9.1-49.75 28.12-67.88c37.44-37.44 98.31-37.44 135.7 0c9.375 9.375 9.375 24.56 0 33.94s-24.56 9.375-33.94 0c-18.69-18.72-49.19-18.72-67.87 0C159.5 231.1 154.5 243.2 154.5 256S159.5 280.9 168.6 289.9zM360.6 289.9c18.69 18.72 49.19 18.72 67.87 0c9.375-9.375 24.56-9.375 33.94 0s9.375 24.56 0 33.94c-18.72 18.72-43.28 28.08-67.87 28.08s-49.16-9.359-67.87-28.08C308.5 305.8 298.5 281.6 298.5 256s9.1-49.75 28.12-67.88c37.44-37.44 98.31-37.44 135.7 0c9.375 9.375 9.375 24.56 0 33.94s-24.56 9.375-33.94 0c-18.69-18.72-49.19-18.72-67.87 0C351.5 231.1 346.5 243.2 346.5 256S351.5 280.9 360.6 289.9z" />
+        </svg>
       </button>
 
       <button class="btn btn-controller me-2" (click)="onFullScreen()" [disabled]="disableVideoController">
@@ -128,7 +110,8 @@
         </svg>
       </button>
 
-      <button class="btn btn-controller" (click)="onPictureInPicture()" [disabled]="disableVideoController">
+      <button class="btn btn-controller picture-in-picture" (click)="onPictureInPicture()"
+              [disabled]="disableVideoController">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path
                 d="M19 11h-8v6h8v-6zm4 8V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zm-2 .02H3V4.97h18v14.05z" />

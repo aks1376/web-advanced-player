@@ -1,7 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSliderChange } from '@angular/material/slider';
 import { SecondsToHumanPipe } from 'src/app/pipes/seconds-to-human.pipe';
 import { VideoService } from 'src/app/services/video.service';
+import { SubtitleManagementDialogComponent } from './subtitle-management-dialog/subtitle-management-dialog.component';
 
 @Component({
   selector: 'app-video-controller',
@@ -12,11 +14,7 @@ export class VideoControllerComponent implements OnInit {
   @ViewChild('currentTimeRef') currentTimeRef!: ElementRef<HTMLParagraphElement>;
 
   currentTime: number = 0;
-  entirePage = false;
   @Input() duration: number = 0;
-  @Input('currentTime') set setCurrentTime(time: number) {
-    console.log(time);
-  }
 
   videoRef!: HTMLVideoElement;
   @Input('videoRef') set setVideoRef(element: HTMLVideoElement) {
@@ -36,9 +34,9 @@ export class VideoControllerComponent implements OnInit {
   disableVideoController = true;
 
   constructor(
-    private videoService: VideoService,
-    private secondsToHumanPipe: SecondsToHumanPipe
-    ) { }
+    private secondsToHumanPipe: SecondsToHumanPipe,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.checkVideoIsReady();
@@ -56,11 +54,6 @@ export class VideoControllerComponent implements OnInit {
 
   onMute() {
     this.videoRef.muted ? this.unmute.emit() : this.mute.emit();
-  }
-
-  onEntirePage() {
-    this.entirePage = !this.videoService.entirePage.value;
-    this.videoService.entirePage.value ? this.videoService.entirePage.next(false) : this.videoService.entirePage.next(true);
   }
 
   onFullScreen() {
@@ -91,6 +84,13 @@ export class VideoControllerComponent implements OnInit {
 
   fastForward() {
     this.videoRef.currentTime += 10;
+  }
+
+  onOpenSubtitlePanel() {
+    this.dialog.open(SubtitleManagementDialogComponent,
+      {
+        width: '400px'
+      }).afterClosed().subscribe();
   }
 
 }
