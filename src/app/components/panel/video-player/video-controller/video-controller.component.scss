@@ -37,8 +37,15 @@
 
         svg {
           fill: white;
-          width: 3rem;
-          height: 3rem;
+          width: 2rem;
+          height: 2rem;
+        }
+
+        @media only screen and (max-width: 483px) {
+          svg {
+            width: 2rem;
+            height: 2rem;
+          }
         }
       }
 
@@ -49,5 +56,21 @@
         }
       }
     }
+  }
+}
+
+.video-speed-small-screen {
+  width: 100%;
+  display: none;
+  text-align: end;
+  @media only screen and (max-width: 700px) {
+    display: inline-block;
+  }
+}
+
+.video-speed-large-screen {
+  display: none;
+  @media only screen and (min-width: 700px) {
+    display: inline-block;
   }
 }

@@ -1,5 +1,9 @@
 <section class="video-controller">
 
+  <div class="video-speed-small-screen">
+    <app-speed class="video-speed ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+  </div>
+
   <div class="track-bar">
     <p class="pe-2" #currentTimeRef>00:00:00</p>
     <mat-slider class="w-100"
@@ -15,7 +19,7 @@
   <div class="buttons">
 
     <div class="btn-group">
-      <button class="btn btn-controller me-3" (click)="onPlayPause()" [disabled]="disableVideoController">
+      <button class="btn btn-controller me-2" (click)="onPlayPause()" [disabled]="disableVideoController">
         <ng-container *ngIf="videoRef.paused else pauseVideo">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                xml:space="preserve" viewBox="20 20 60 60">
@@ -69,10 +73,12 @@
         </svg>
       </button>
 
-      <app-speed class="ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+      <div class="video-speed-large-screen">
+        <app-speed class="video-speed ms-3" (speed)="onSpeedChange($event)" [disabled]="disableVideoController"></app-speed>
+      </div>
     </div>
 
-    <div class="btn btn-group">
+    <div class="btn-group">
       <button class="btn btn-controller me-2" (click)="onMute()" [disabled]="disableVideoController">
         <ng-container *ngIf="videoRef.muted else unmute">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
